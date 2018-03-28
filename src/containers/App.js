@@ -3,23 +3,57 @@ import './App.css';
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import Principal from "./Principal";
+import { find, filter } from 'lodash';
+import {
+    makeExecutableSchema
+} from 'graphql-tools';
+import { mockNetworkInterfaceWithSchema } from 'apollo-test-utils';
 
-import { typeDefs } from '../schema';
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { SchemaLink } from "apollo-link-schema";
-import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+const typeDefs = `
+  type Lembrete {
+    id: Int!
+    titulo: String
+  }
 
-const schema = makeExecutableSchema({ typeDefs });
-addMockFunctionsToSchema({
-    schema
+  # the schema allows the following query:
+  type Query {
+    lembretes: [Lembrete]
+  }
+
+  # this schema allows the following mutation:
+  type Mutation {
+    upLembrete (
+      lembreteId: Int!
+    ): Lembrete
+  }
+`;
+
+const resolvers = {
+    Query: {
+        lembretes: () => lembretes,
+    },
+    Mutation: {
+        upLembrete: (_, { lembreteId }) => {},
+    }
+};
+
+export const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers,
 });
 
-const apolloCache = new InMemoryCache(window.__APOLLO_STATE__);
+const mockNetworkInterface = mockNetworkInterfaceWithSchema({ schema });
 
 const client = new ApolloClient({
-    cache: apolloCache,
-    link: new SchemaLink({ schema })
+    networkInterface: mockNetworkInterface,
 });
+
+const lembretes = [
+    { id: 1, titulo: 'Introduction to GraphQL' },
+    { id: 2, titulo: 'Welcome to Apollo' },
+    { id: 3, titulo: 'Advanced GraphQL' },
+    { id: 4, titulo: 'Launchpad is Cool' },
+];
 
 
 class App extends Component {
