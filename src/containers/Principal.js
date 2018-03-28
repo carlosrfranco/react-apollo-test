@@ -9,7 +9,7 @@ const lembretesListQuery = gql`
   query lembretesQuery {
   lembretes {
     id
-    titulo
+    title
   }
 }`;
 
@@ -28,6 +28,7 @@ export default class Principal extends React.Component{
         return (
             <Query query={lembretesListQuery}>
                 {({ loading, error, lembretes }) => {
+                    console.log(error);
                     if (loading) return <div>Loading...</div>;
                     if (error) return <div>Error :(</div>;
 

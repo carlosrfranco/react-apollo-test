@@ -3,30 +3,12 @@ import './App.css';
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import Principal from "./Principal";
-import { find, filter } from 'lodash';
 import {
-    makeExecutableSchema
+    makeExecutableSchema,
+    addMockFunctionsToSchema
 } from 'graphql-tools';
 import { mockNetworkInterfaceWithSchema } from 'apollo-test-utils';
-
-const typeDefs = `
-  type Lembrete {
-    id: Int!
-    titulo: String
-  }
-
-  # the schema allows the following query:
-  type Query {
-    lembretes: [Lembrete]
-  }
-
-  # this schema allows the following mutation:
-  type Mutation {
-    upLembrete (
-      lembreteId: Int!
-    ): Lembrete
-  }
-`;
+import { typeDefs } from '../schema';
 
 const resolvers = {
     Query: {
@@ -42,17 +24,19 @@ export const schema = makeExecutableSchema({
     resolvers,
 });
 
+addMockFunctionsToSchema({ schema });
 const mockNetworkInterface = mockNetworkInterfaceWithSchema({ schema });
 
 const client = new ApolloClient({
+    ssr: true,
     networkInterface: mockNetworkInterface,
 });
 
 const lembretes = [
-    { id: 1, titulo: 'Introduction to GraphQL' },
-    { id: 2, titulo: 'Welcome to Apollo' },
-    { id: 3, titulo: 'Advanced GraphQL' },
-    { id: 4, titulo: 'Launchpad is Cool' },
+    { id: 1, title: 'Text 1' },
+    { id: 2, title: 'Text 2' },
+    { id: 3, title: 'Text 3' },
+    { id: 4, title: 'Text 4' },
 ];
 
 

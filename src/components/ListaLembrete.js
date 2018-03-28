@@ -15,7 +15,7 @@ export default class ListaLembrete extends React.Component{
                 if(lembrete.titulo.indexOf(filtro) < 0){
                     return;
                 }
-                return <li className="Lembrete" key={lembrete.id}>{lembrete.titulo}
+                return <li className="Lembrete" key={lembrete.id}>{lembrete.title}
                     <div>
                         <button onClick={this.handleClickEditButton}>Editar</button>
                         <button id={lembrete.id} onClick={(e) => this.handleClickSaveButton(e)}>Salvar</button>
