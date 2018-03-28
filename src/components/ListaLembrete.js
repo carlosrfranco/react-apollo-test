@@ -13,6 +13,9 @@ export default class ListaLembrete extends React.Component{
         const l = this.props.lembretes ? this.props.lembretes : [];
         const listItems = l.map((lembrete) =>
             {
+                if(lembrete.node.id.indexOf(filtro) < 0){
+                    return;
+                }
                 return <li className="Lembrete" key={lembrete.node.id}>{lembrete.node.id}</li>
             }
         );

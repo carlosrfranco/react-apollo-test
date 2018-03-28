@@ -38,7 +38,7 @@ export default class Principal extends React.Component{
                     return (
                         <div>
                             <div>
-                                <Topo nome="Lembretes"/>
+                                <Topo nome="React Apollo Test"/>
                             </div>
                             <div className="Conteudo">
                                 <InputPesquisa filtro={this.filtro}/>

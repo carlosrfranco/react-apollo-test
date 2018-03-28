@@ -7,7 +7,6 @@ function Topo(props){
     return (
         <div className="Topo">
             <h1>{props.nome}</h1>
-            <button>Novo</button>
         </div>
     )
 }
