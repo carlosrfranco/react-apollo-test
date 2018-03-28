@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "titulo": "Café da manhã"
+  },
+  {
+    "id": 2,
+    "titulo": "Estudar"
+  },
+  {
+    "id": 3,
+    "titulo": "Almoçar"
+  },
+  {
+    "id": 4,
+    "titulo": "Jantar"
+  }
+]
