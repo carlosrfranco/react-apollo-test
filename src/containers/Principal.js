@@ -6,11 +6,14 @@ import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
 
 const lembretesListQuery = gql`
-  query lembretesQuery {
-  lembretes {
-    id
-    title
-  }
+  query starshipsListQuery {
+      allStarships {
+        edges {
+          node {
+            id
+          }
+        }
+      }
 }`;
 
 export default class Principal extends React.Component{
@@ -27,21 +30,21 @@ export default class Principal extends React.Component{
 
         return (
             <Query query={lembretesListQuery}>
-                {({ loading, error, lembretes }) => {
-                    console.log(error);
+                {({ loading, error, data }) => {
+                    console.log(data);
                     if (loading) return <div>Loading...</div>;
                     if (error) return <div>Error :(</div>;
 
                     return (
-                    <div>
                         <div>
-                            <Topo nome="Lembretes"/>
+                            <div>
+                                <Topo nome="Lembretes"/>
+                            </div>
+                            <div className="Conteudo">
+                                <InputPesquisa filtro={this.filtro}/>
+                                <ListaLembrete filtro={this.state.filtro} lembretes={data.allStarships.edges} className="ListaLembretes"/>
+                            </div>
                         </div>
-                        <div className="Conteudo">
-                            <InputPesquisa filtro={this.filtro}/>
-                            <ListaLembrete filtro={this.state.filtro} lembretes={lembretes} className="ListaLembretes"/>
-                        </div>
-                    </div>
                     )
                 }}
             </Query>

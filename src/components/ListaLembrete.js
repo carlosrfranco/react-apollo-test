@@ -10,17 +10,10 @@ export default class ListaLembrete extends React.Component{
 
     render = () => {
         const filtro = this.props.filtro;
-        const listItems = this.props.lembretes.map((lembrete) =>
+        const l = this.props.lembretes ? this.props.lembretes : [];
+        const listItems = l.map((lembrete) =>
             {
-                if(lembrete.titulo.indexOf(filtro) < 0){
-                    return;
-                }
-                return <li className="Lembrete" key={lembrete.id}>{lembrete.title}
-                    <div>
-                        <button onClick={this.handleClickEditButton}>Editar</button>
-                        <button id={lembrete.id} onClick={(e) => this.handleClickSaveButton(e)}>Salvar</button>
-                    </div>
-                </li>
+                return <li className="Lembrete" key={lembrete.node.id}>{lembrete.node.id}</li>
             }
         );
         return (
