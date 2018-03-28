@@ -1,1 +1,1 @@
-to run: npm start
+to run: npm install && npm start

@@ -2,7 +2,6 @@ import React from 'react';
 import Topo from "../components/Topo";
 import InputPesquisa from "../components/InputPesquisa";
 import ListaLembrete from "../components/ListaLembrete";
-import RestClientAPI from "../RestClientAPI";
 import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
 import { graphql } from "react-apollo";
@@ -22,19 +21,10 @@ export default class Principal extends React.Component{
     constructor(props) {
         super(props);
         this.state = {filtro: ''};
-        this.api = new RestClientAPI();
     }
-
-    componentDidMount = () => {
-        this.api.doGET("data/data.json", this.getLembretes);
-    };
 
     filtro = (valor) => {
         this.setState({filtro: valor})
-    };
-
-    getLembretes = (lista) => {
-        this.setState({lembretes: lista})
     };
 
     render = () => {
