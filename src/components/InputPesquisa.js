@@ -16,7 +16,7 @@ export default class InputPesquisa extends React.Component{
         return (
             <input className="BuscaInput"
                    onChange={this.handleChange}
-                   placeholder="Find id of register"/>
+                   placeholder="Find by name"/>
         )
     }
 }
