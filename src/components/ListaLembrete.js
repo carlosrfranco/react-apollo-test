@@ -16,7 +16,7 @@ export default class ListaLembrete extends React.Component{
                 if(lembrete.node.id.indexOf(filtro) < 0){
                     return;
                 }
-                return <li className="Lembrete" key={lembrete.node.id}>{lembrete.node.id}</li>
+                return <li className="Lembrete" key={lembrete.node.id}>{lembrete.node.name}</li>
             }
         );
         return (

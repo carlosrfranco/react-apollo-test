@@ -11,6 +11,7 @@ const lembretesListQuery = gql`
         edges {
           node {
             id
+            name
           }
         }
       }
